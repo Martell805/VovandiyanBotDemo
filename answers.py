@@ -6,7 +6,7 @@ from config import CHANNELS_ID, CATEGORIES
 
 async def up_role(client, message: discord.Message, member_id, *args):
     guild = message.guild
-    member = guild.get_member(int(member_id[3:-1]))
+    member = guild.get_member(int(member_id[2:-1]))
 
     role_path = client.role_path_handler
     role, role_number = role_path.get_highest_role(member)
@@ -40,7 +40,7 @@ async def up_role(client, message: discord.Message, member_id, *args):
 
 async def down_role(client, message: discord.Message, member_id, *args):
     guild = message.guild
-    member = guild.get_member(int(member_id[3:-1]))
+    member = guild.get_member(int(member_id[2:-1]))
 
     role_path = client.role_path_handler
     role, role_number = role_path.get_highest_role(member)
@@ -129,7 +129,7 @@ async def edit_channel(client, message: discord.Message, user_limit, *name):
 async def print_score(client, message: discord.Message, *args):
     other_member = len(args) != 0
     if other_member:
-        id = int(args[0][3:-1])
+        id = int(args[0][2:-1])
         guild = message.guild
         target = guild.get_member(id)
     else:
@@ -179,7 +179,7 @@ async def dice_duel(client, message: discord.Message, opponent, *args):
     channel = message.channel
     guild = message.guild
 
-    opponent_id = int(opponent[3:-1])
+    opponent_id = int(opponent[2:-1])
     opponent = guild.get_member(opponent_id)
 
     await client.duel_handler.duel(channel, initiator, opponent)
@@ -189,7 +189,7 @@ async def duel_stats(client, message: discord.Message, *args):
     other_member = len(args) != 0
 
     if other_member:
-        id = int(args[0][3:-1])
+        id = int(args[0][2:-1])
         guild = message.guild
         target = guild.get_member(id)
     else:
@@ -200,11 +200,11 @@ async def duel_stats(client, message: discord.Message, *args):
     if other_member:
         text = f'{target.name} сыграл {duel_user.get_games()} игр, ' \
                f'из которых выиграл {duel_user.get_wins()}. ' \
-               f'Его процент побед - {duel_user.get_winrate()}.'
+               f'Его процент побед - {duel_user.get_winrate()}, а серия побед - {duel_user.get_win_streak()}.'
     else:
         text = f'{target.mention}, вы сыграли {duel_user.get_games()} игр, ' \
                f'из которых выиграли {duel_user.get_wins()}. ' \
-               f'Ваш процент побед - {duel_user.get_winrate()}. '
+               f'Ваш процент побед - {duel_user.get_winrate()}, а серия побед - {duel_user.get_win_streak()}. '
 
     await message.channel.send(text)
 

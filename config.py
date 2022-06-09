@@ -1,4 +1,4 @@
-TOKEN = 'SECRET_TOCKEN'
+TOKEN = 'SECRET_TOKEN'
 PREFIX = '!'
 
 
@@ -80,6 +80,7 @@ REACTION_POSTS = {
         },
     }
 }
+
 
 ROLES_INFO = {
     492721131900370954: 0,
